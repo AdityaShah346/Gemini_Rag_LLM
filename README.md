@@ -85,9 +85,45 @@ Replace:
 python query_data_gemini.py data/sample.pdf "What is the main topic discussed in this document?" --password 1234
 ```
 
-### Docker Usage
+## Docker Usage
 
 You can also run this project using Docker, which encapsulates the environment and dependencies, ensuring it works consistently across different systems.
+
+### Using the Pre-built Docker Image
+
+If you want to use the pre-built Docker image, you can pull it directly from Docker Hub and run it without building the image manually.
+
+#### Step 1: Pull the Docker Image
+
+Run the following command to pull the Docker image from Docker Hub:
+
+```bash
+docker pull adityashah346/pdf-query-gemini:latest
+```
+
+#### Step 2: Run the Docker Container
+
+Use the following command to run the Docker container, passing in the necessary arguments. Replace `"your_google_gemini_api_key"` with your actual API key:
+
+```bash
+docker run -e GEMINI_API_KEY="your_google_gemini_api_key" -v path_to_your_pdf:/app/pdf_file.pdf adityashah346/pdf-query-gemini:latest "/app/pdf_file.pdf"
+```
+
+Explanation:
+- `-e GEMINI_API_KEY="your_google_gemini_api_key"`: Sets the API key as an environment variable inside the container.
+- `-v path_to_your_pdf:/app/pdf_file.pdf`: Mounts your local PDF file to `/app/pdf_file.pdf` inside the container.
+- `adityashah346/pdf-query-gemini:latest`: The pre-built Docker image from Docker Hub.
+- `"/app/pdf_file.pdf"`: The file path inside the container for the PDF file.
+
+#### Example Docker Command
+
+```bash
+docker run -e GEMINI_API_KEY="your_google_gemini_api_key" -v $(pwd)/data/sample.pdf:/app/pdf_file.pdf adityashah346/pdf-query-gemini:latest "/app/pdf_file.pdf"
+```
+
+### Building and Running Docker Locally
+
+If you prefer to build the Docker image locally, you can follow these steps.
 
 #### Step 1: Build the Docker Image
 
